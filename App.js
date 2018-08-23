@@ -1,6 +1,7 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
 import InputTester from "./components/InputTester";
+import ButtonTester from "./components/ButtonTester";
 
 export default class App extends React.Component {
     render() {
@@ -14,6 +15,7 @@ export default class App extends React.Component {
                     height: 110
                 }} />
                 <InputTester/>
+                <ButtonTester/>
             </View>
         );
     }
