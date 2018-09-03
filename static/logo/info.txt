@@ -1,0 +1,17 @@
+
+Hope you enjoy your new logo, here are the people that
+made your beautiful logo happen :)
+
+font name: TruenoRg
+font link: https://fontlibrary.org/en/font/trueno
+font author: Julieta Ulanovsky
+font author site: http://www.zkysky.com.ar/
+
+icon designer: No More Heroes
+icon designer link: /samuelblomley
+        
+
+fontColor: {"hex":"#3F96D0"}
+bgColor: {"hex":"#2F3033"}
+iconColor: {"hex":"#3F96D0"}
+      
