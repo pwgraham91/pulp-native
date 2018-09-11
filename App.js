@@ -1,9 +1,7 @@
 import React from 'react';
-import {Image, StyleSheet, View} from 'react-native';
-import InputTester from "./components/InputTester";
-import ButtonTester from "./components/ButtonTester";
 import {createStackNavigator} from "react-navigation";
 import WelcomeComponent from "./components/WelcomeComponent";
+import InputViewComponent from "./components/InputViewComponent";
 
 const App = createStackNavigator(
     {
@@ -13,7 +11,12 @@ const App = createStackNavigator(
                 header: null
             }
         },
-        InputTester_: { screen: InputTester }
+        InputView: {
+            screen: InputViewComponent,
+            navigationOptions: {
+                header: null
+            }
+        }
     },
 );
 export default App

@@ -13,3 +13,6 @@
 - Go to the second page and open the Expo app
 - If you ever want to see the menu, `Command-D`
  
+## running in expo
+`npm run start`
+__
