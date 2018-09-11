@@ -26,6 +26,7 @@ export default class InputViewComponent extends Component {
             .then((response) => response.json())
             .then((responseJson) => {
                 const accessToken = responseJson.access_token
+                // todo add this to state
             })
             .catch((error) => {
                 console.error('error', error)
