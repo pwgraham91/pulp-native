@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
+import {apiURL} from "../appConfig";
 
 export default class InputViewComponent extends Component {
     constructor(props) {
@@ -14,7 +15,21 @@ export default class InputViewComponent extends Component {
     }
 
     authenticate() {
-        console.log('auth', this.state)
+        fetch(`${apiURL}/login`, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(this.state),
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                const accessToken = responseJson.access_token
+            })
+            .catch((error) => {
+                console.error('error', error)
+            })
     }
 
     updateEmail(text) {
@@ -60,8 +75,9 @@ const styles = StyleSheet.create({
     container: {
         display: 'flex',
         alignItems: 'center',
+        paddingTop: 100
     },
-    inputStyle: {
+    textInput: {
     },
     buttonStyle: {
         padding: 10,
