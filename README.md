@@ -15,4 +15,12 @@
  
 ## running in expo
 `npm run start`
-__
+
+## debugging
+`npm install -g react-devtools`
+
+`react-devtools`
+
+If you're not in a simulator then you also need to run the following in a command prompt:
+ 
+ `adb reverse tcp:8097 tcp:8097`
