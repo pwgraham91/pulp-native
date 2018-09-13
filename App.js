@@ -5,6 +5,7 @@ import InputViewComponent from "./components/InputViewComponent";
 import { createNavigationReducer, createReactNavigationReduxMiddleware, reduxifyNavigator } from "react-navigation-redux-helpers";
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import {Provider, connect} from 'react-redux';
+import userReducer from "./reducers/userReducer";
 
 const AppNavigator = createStackNavigator(
     {
@@ -24,6 +25,7 @@ const AppNavigator = createStackNavigator(
 );
 const navReducer = createNavigationReducer(AppNavigator)
 const appReducer = combineReducers({
+    user: userReducer,
     nav: navReducer
 });
 const middleware = createReactNavigationReduxMiddleware(

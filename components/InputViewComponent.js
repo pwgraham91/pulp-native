@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
 import {apiURL} from "../appConfig";
+import {listRepos} from "../reducers/userReducer";
+import { connect } from 'react-redux';
 
-export default class InputViewComponent extends Component {
+class InputViewComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,6 +14,11 @@ export default class InputViewComponent extends Component {
         this.updateEmail = this.updateEmail.bind(this);
         this.updatePassword = this.updatePassword.bind(this);
         this.authenticate = this.authenticate.bind(this);
+    }
+
+    componentDidMount() {
+        console.log('listing!')
+        this.props.listRepos()
     }
 
     authenticate() {
@@ -88,3 +95,17 @@ const styles = StyleSheet.create({
         margin: 10
     }
 });
+
+const mapStateToProps = state => {
+    console.log('mapping state', state)
+  return {
+    repos: 'these are repos?'
+  };
+};
+
+const mapDispatchToProps = {
+  listRepos
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(InputViewComponent);
+
