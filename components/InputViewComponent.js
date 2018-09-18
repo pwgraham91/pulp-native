@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
 import {apiURL} from "../appConfig";
+import { setAccessToken } from '../reducers/userReducer'
+import { connect } from 'react-redux';
 
-export default class InputViewComponent extends Component {
+class InputViewComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -25,8 +27,7 @@ export default class InputViewComponent extends Component {
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                const accessToken = responseJson.access_token
-                // todo add this to state
+                this.props.setAccessToken(responseJson.access_token)
             })
             .catch((error) => {
                 console.error('error', error)
@@ -88,3 +89,14 @@ const styles = StyleSheet.create({
         margin: 10
     }
 });
+
+const mapStateToProps = state => {
+  return state
+};
+
+const mapDispatchToProps = {
+  setAccessToken
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(InputViewComponent);
+
