@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
 import {apiURL} from "../appConfig";
-import {listRepos} from "../reducers/userReducer";
+import { setAccessToken } from '../reducers/userReducer'
 import { connect } from 'react-redux';
 
 class InputViewComponent extends Component {
@@ -16,11 +16,6 @@ class InputViewComponent extends Component {
         this.authenticate = this.authenticate.bind(this);
     }
 
-    componentDidMount() {
-        console.log('listing!')
-        this.props.listRepos()
-    }
-
     authenticate() {
         fetch(`${apiURL}/login`, {
             method: 'POST',
@@ -32,8 +27,7 @@ class InputViewComponent extends Component {
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                const accessToken = responseJson.access_token
-                // todo add this to state
+                this.props.setAccessToken(responseJson.access_token)
             })
             .catch((error) => {
                 console.error('error', error)
@@ -97,14 +91,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-    console.log('mapping state', state)
-  return {
-    repos: 'these are repos?'
-  };
+  return state
 };
 
 const mapDispatchToProps = {
-  listRepos
+  setAccessToken
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InputViewComponent);
