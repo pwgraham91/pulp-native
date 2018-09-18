@@ -35,6 +35,7 @@ class InputViewComponent extends Component {
     }
 
     updateEmail(text) {
+        console.log('user', this.props.user)
         this.setState({
             ...this.state,
             email: text
