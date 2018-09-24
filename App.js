@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation';
 import WelcomeComponent from './components/WelcomeComponent';
-import InputViewComponent from './components/InputViewComponent';
+import LoginViewComponent from './components/LoginViewComponent';
 import {
   createNavigationReducer,
   createReactNavigationReduxMiddleware,
@@ -23,8 +23,8 @@ const AppNavigator = createStackNavigator({
       header: null,
     },
   },
-  InputView: {
-    screen: InputViewComponent,
+  LoginView: {
+    screen: LoginViewComponent,
     navigationOptions: {
       header: null,
     },

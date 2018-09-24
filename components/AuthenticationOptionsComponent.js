@@ -13,15 +13,9 @@ export default class AuthenticationOptionsComponent extends Component {
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.buttonStyle}
-          onPress={() => navigate('InputView')}
+          onPress={() => navigate('LoginView')}
         >
           <Text style={styles.textStyle}>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.buttonStyle}
-          onPress={() => navigate('InputTester_')}
-        >
-          <Text style={styles.textStyle}>Signup</Text>
         </TouchableOpacity>
       </View>
     );

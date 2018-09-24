@@ -4,7 +4,7 @@ import { apiURL } from '../appConfig';
 import { setAccessToken } from '../reducers/userReducer';
 import { connect } from 'react-redux';
 
-class InputViewComponent extends Component {
+class LoginViewComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,6 +35,7 @@ class InputViewComponent extends Component {
   }
 
   updateEmail(text) {
+    console.log('props', this.props)
     this.setState({
       ...this.state,
       email: text,
@@ -100,4 +101,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(InputViewComponent);
+)(LoginViewComponent);
