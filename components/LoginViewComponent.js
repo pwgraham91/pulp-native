@@ -27,7 +27,6 @@ class LoginViewComponent extends Component {
   }
 
   updateEmail(text) {
-    console.log('props', this.props);
     this.setState({
       ...this.state,
       email: text,
