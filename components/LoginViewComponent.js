@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
-import { apiURL } from '../appConfig';
 import { setAccessToken } from '../reducers/userReducer';
 import { connect } from 'react-redux';
-import axios from 'axios';
 
 class LoginViewComponent extends Component {
   constructor(props) {
@@ -18,14 +16,8 @@ class LoginViewComponent extends Component {
   }
 
   authenticate() {
-    // todo set common axios headers
-    axios
-      .post(`${apiURL}/login`, JSON.stringify(this.state), {
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-      })
+    this.props.user.axios
+      .post('/login', JSON.stringify(this.state))
       .then(responseJson => {
         this.props.setAccessToken(responseJson.data.access_token);
       })
