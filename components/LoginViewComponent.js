@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
-import { setAccessToken } from '../reducers/userReducer';
+import {
+  incrementCounterAction,
+  setAccessToken,
+} from '../reducers/userReducer';
 import { connect } from 'react-redux';
+import { AsyncStorage } from 'react-native';
 
 class LoginViewComponent extends Component {
   constructor(props) {
@@ -13,6 +17,8 @@ class LoginViewComponent extends Component {
     this.updateEmail = this.updateEmail.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
     this.authenticate = this.authenticate.bind(this);
+    this.incrementCounter = this.incrementCounter.bind(this);
+    this.storeData = this.storeData.bind(this);
   }
 
   authenticate() {
@@ -40,6 +46,33 @@ class LoginViewComponent extends Component {
     });
   }
 
+  incrementCounter() {
+    console.log('async', this._retrieveData());
+  }
+
+  storeData() {
+    this._storeData();
+  }
+
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@MySuperStore:key');
+      console.log('valuing', value);
+    } catch (error) {
+      console.log('erroring', error);
+      // Error retrieving data
+    }
+  };
+  _storeData = async () => {
+    try {
+      console.log('storing');
+      // todo move this code to the reducer and save the access token to local storage then get it on the way in for default
+      await AsyncStorage.setItem('@MySuperStore:key', 'I like to save it.');
+    } catch (error) {
+      console.log('error store', error);
+      // Error saving data
+    }
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -59,6 +92,16 @@ class LoginViewComponent extends Component {
           style={styles.buttonStyle}
           title="Log In"
           onPress={this.authenticate}
+        />
+        <Button
+          style={styles.buttonStyle}
+          title="Increment"
+          onPress={this.incrementCounter}
+        />
+        <Button
+          style={styles.buttonStyle}
+          title="store"
+          onPress={this.storeData}
         />
       </View>
     );
@@ -87,6 +130,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   setAccessToken,
+  incrementCounterAction,
 };
 
 export default connect(
