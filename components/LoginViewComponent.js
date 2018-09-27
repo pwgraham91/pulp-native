@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
-import { apiURL } from '../appConfig';
 import { setAccessToken } from '../reducers/userReducer';
 import { connect } from 'react-redux';
 
@@ -17,25 +16,17 @@ class LoginViewComponent extends Component {
   }
 
   authenticate() {
-    fetch(`${apiURL}/login`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(this.state),
-    })
-      .then(response => response.json())
+    this.props.user.axios
+      .post('/login', JSON.stringify(this.state))
       .then(responseJson => {
-        this.props.setAccessToken(responseJson.access_token);
+        this.props.setAccessToken(responseJson.data.access_token);
       })
       .catch(error => {
-        console.error('error', error);
+        console.log('error', error);
       });
   }
 
   updateEmail(text) {
-    console.log('props', this.props)
     this.setState({
       ...this.state,
       email: text,
