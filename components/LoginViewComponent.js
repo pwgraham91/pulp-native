@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
-import { setAccessToken } from '../reducers/userReducer';
+import {
+  incrementCounterAction,
+  setAccessToken,
+} from '../reducers/userReducer';
 import { connect } from 'react-redux';
+import { AsyncStorage } from 'react-native';
 
 class LoginViewComponent extends Component {
   constructor(props) {
@@ -87,6 +91,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   setAccessToken,
+  incrementCounterAction,
 };
 
 export default connect(

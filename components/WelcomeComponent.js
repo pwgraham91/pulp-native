@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { AsyncStorage, View, StyleSheet, Image } from 'react-native';
 import AuthenticationOptionsComponent from './AuthenticationOptionsComponent';
+import { setStateFromStorage } from '../reducers/userReducer';
+import { connect } from 'react-redux';
 
-export default class WelcomeComponent extends Component {
+class WelcomeComponent extends Component {
   constructor(props) {
     super(props);
+    this.loadState();
   }
 
+  loadState = async () => {
+    const savedState = await AsyncStorage.getItem('@UserStore:userState');
+    this.props.setStateFromStorage(savedState);
+  };
+
   render() {
-    const { navigate } = this.props.navigation;
+    console.log('rendering welcome component');
     return (
       <View style={styles.container}>
         <Image
@@ -34,3 +42,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+const mapStateToProps = state => {
+  return state;
+};
+
+const mapDispatchToProps = {
+  setStateFromStorage,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WelcomeComponent);
