@@ -10,8 +10,6 @@ import {
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import userReducer from './reducers/userReducer';
-import { PersistGate } from 'redux-persist/lib/integration/react';
-import { persistStore } from 'redux-persist/lib/index';
 
 const AppNavigator = createStackNavigator({
   Welcome: {

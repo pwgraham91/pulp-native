@@ -19,8 +19,19 @@ class LoginViewComponent extends Component {
     this.authenticate = this.authenticate.bind(this);
     this.incrementCounter = this.incrementCounter.bind(this);
     this.storeData = this.storeData.bind(this);
+    this.verify = this.verify.bind(this);
   }
 
+  verify() {
+    this.props.user.axios
+      .get('/protected')
+      .then(responseJson => {
+        console.log('response', responseJson);
+      })
+      .catch(error => {
+        console.log('error', error);
+      });
+  }
   authenticate() {
     this.props.user.axios
       .post('/login', JSON.stringify(this.state))
@@ -47,7 +58,8 @@ class LoginViewComponent extends Component {
   }
 
   incrementCounter() {
-    console.log('async', this._retrieveData());
+    this.props.incrementCounterAction();
+    // this._retrieveData();
   }
 
   storeData() {
@@ -56,8 +68,10 @@ class LoginViewComponent extends Component {
 
   _retrieveData = async () => {
     try {
-      const value = await AsyncStorage.getItem('@MySuperStore:key');
-      console.log('valuing', value);
+      const value = await AsyncStorage.getItem('@UserStore:incrementer');
+      const parsed = JSON.parse(value);
+      console.log('valuing', parsed);
+      console.log('valuing2', parsed.increment);
     } catch (error) {
       console.log('erroring', error);
       // Error retrieving data
@@ -67,7 +81,12 @@ class LoginViewComponent extends Component {
     try {
       console.log('storing');
       // todo move this code to the reducer and save the access token to local storage then get it on the way in for default
-      await AsyncStorage.setItem('@MySuperStore:key', 'I like to save it.');
+      await AsyncStorage.setItem(
+        '@UserStore:incrementer',
+        JSON.stringify({
+          increment: 2,
+        })
+      );
     } catch (error) {
       console.log('error store', error);
       // Error saving data
@@ -102,6 +121,11 @@ class LoginViewComponent extends Component {
           style={styles.buttonStyle}
           title="store"
           onPress={this.storeData}
+        />
+        <Button
+          style={styles.buttonStyle}
+          title="verify"
+          onPress={this.verify}
         />
       </View>
     );
