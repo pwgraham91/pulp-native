@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, StyleSheet } from 'react-native';
 import {
   incrementCounterAction,
   setAccessToken,
 } from '../reducers/userReducer';
 import { connect } from 'react-redux';
-import { AsyncStorage } from 'react-native';
+import { Container, Form, Input, Item } from 'native-base';
 
 class LoginViewComponent extends Component {
   constructor(props) {
@@ -46,33 +46,36 @@ class LoginViewComponent extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Log In</Text>
-        <TextInput
-          style={styles.textInput}
-          placeholder="Email Address"
-          onChangeText={this.updateEmail}
-        />
-        <TextInput
-          style={styles.textInput}
-          placeholder="password"
-          secureTextEntry={true}
-          onChangeText={this.updatePassword}
-        />
-        <Button
-          style={styles.buttonStyle}
-          title="Log In"
-          onPress={this.authenticate}
-        />
-      </View>
+      <Container style={styles.container}>
+        <Form>
+          <Item>
+            <Input
+              style={styles.textInput}
+              placeholder="Email Address"
+              onChangeText={this.updateEmail}
+            />
+          </Item>
+          <Item>
+            <Input
+              style={styles.textInput}
+              placeholder="password"
+              secureTextEntry={true}
+              onChangeText={this.updatePassword}
+            />
+          </Item>
+          <Button
+            style={styles.buttonStyle}
+            title="Log In"
+            onPress={this.authenticate}
+          />
+        </Form>
+      </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    alignItems: 'center',
     paddingTop: 100,
   },
   textInput: {},

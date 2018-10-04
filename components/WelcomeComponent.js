@@ -16,7 +16,6 @@ class WelcomeComponent extends Component {
   };
 
   render() {
-    console.log('rendering welcome component');
     return (
       <View style={styles.container}>
         <Image
