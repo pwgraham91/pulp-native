@@ -1,4 +1,6 @@
 {
+  "name": "pulp-native",
+  "displayName": "pulp-native",
   "expo": {
     "sdkVersion": "27.0.0"
   },
