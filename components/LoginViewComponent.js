@@ -45,6 +45,9 @@ class LoginViewComponent extends Component {
   }
 
   render() {
+    // console.log(1);
+    // navigate('NflGameList', {});
+
     return (
       <Container style={styles.container}>
         <Form>

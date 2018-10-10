@@ -11,6 +11,7 @@ import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import userReducer from './reducers/userReducer';
 import SignupViewComponent from './components/SignupViewComponent';
+import NflGameList from './components/NflGameList';
 
 const AppNavigator = createStackNavigator({
   Welcome: {
@@ -27,6 +28,12 @@ const AppNavigator = createStackNavigator({
   },
   SignupView: {
     screen: SignupViewComponent,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  NflGameList: {
+    screen: NflGameList,
     navigationOptions: {
       header: null,
     },

@@ -1,25 +1,15 @@
 import React, { Component } from 'react';
-import { AsyncStorage, View, StyleSheet, Image } from 'react-native';
-import AuthenticationOptionsComponent from './AuthenticationOptionsComponent';
-import { setStateFromStorage } from '../reducers/userReducer';
+import { View, StyleSheet, Image } from 'react-native';
 import { connect } from 'react-redux';
+import { Text } from 'native-base';
 
-class WelcomeComponent extends Component {
+class NflGameList extends Component {
   constructor(props) {
     super(props);
-    this.loadState();
   }
 
-  loadState = async () => {
-    const savedState = await AsyncStorage.getItem('@UserStore:userState');
-    this.props.setStateFromStorage(savedState);
-    if (this.props.user.accessToken) {
-      const { navigate } = this.props.navigation;
-      navigate('NflGameList');
-    }
-  };
-
   render() {
+    console.log('rndering nfl');
     return (
       <View style={styles.container}>
         <Image
@@ -31,7 +21,7 @@ class WelcomeComponent extends Component {
             marginBottom: 100,
           }}
         />
-        <AuthenticationOptionsComponent navigation={this.props.navigation} />
+        <Text>NFL</Text>
       </View>
     );
   }
@@ -50,11 +40,9 @@ const mapStateToProps = state => {
   return state;
 };
 
-const mapDispatchToProps = {
-  setStateFromStorage,
-};
+const mapDispatchToProps = {};
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(WelcomeComponent);
+)(NflGameList);
