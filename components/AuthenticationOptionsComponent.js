@@ -20,6 +20,14 @@ export default class AuthenticationOptionsComponent extends Component {
         >
           <Text style={styles.textStyle}>Login</Text>
         </Button>
+        <Button
+          bordered
+          light
+          style={styles.buttonStyle}
+          onPress={() => navigate('SignupView')}
+        >
+          <Text style={styles.textStyle}>Signup</Text>
+        </Button>
       </View>
     );
   }
@@ -37,5 +45,6 @@ const styles = StyleSheet.create({
   buttonStyle: {
     width: 200,
     justifyContent: 'center',
+    marginBottom: 20,
   },
 });
