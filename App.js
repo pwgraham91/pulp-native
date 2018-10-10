@@ -10,6 +10,7 @@ import {
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import userReducer from './reducers/userReducer';
+import SignupViewComponent from './components/SignupViewComponent';
 
 const AppNavigator = createStackNavigator({
   Welcome: {
@@ -20,6 +21,12 @@ const AppNavigator = createStackNavigator({
   },
   LoginView: {
     screen: LoginViewComponent,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  SignupView: {
+    screen: SignupViewComponent,
     navigationOptions: {
       header: null,
     },

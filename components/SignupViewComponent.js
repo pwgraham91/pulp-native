@@ -11,9 +11,11 @@ class LoginViewComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: '',
       email: '',
       password: '',
     };
+    this.updateName = this.updateName.bind(this);
     this.updateEmail = this.updateEmail.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
     this.authenticate = this.authenticate.bind(this);
@@ -21,13 +23,20 @@ class LoginViewComponent extends Component {
 
   authenticate() {
     this.props.user.axios
-      .post('/login', JSON.stringify(this.state))
+      .post('/create_user', JSON.stringify(this.state))
       .then(responseJson => {
         this.props.setAccessToken(responseJson.data.access_token);
       })
       .catch(error => {
         console.log('error', error);
       });
+  }
+
+  updateName(text) {
+    this.setState({
+      ...this.state,
+      name: text,
+    });
   }
 
   updateEmail(text) {
@@ -51,6 +60,13 @@ class LoginViewComponent extends Component {
           <Item>
             <Input
               style={styles.textInput}
+              placeholder="Name"
+              onChangeText={this.updateName}
+            />
+          </Item>
+          <Item>
+            <Input
+              style={styles.textInput}
               placeholder="Email Address"
               onChangeText={this.updateEmail}
             />
@@ -65,7 +81,7 @@ class LoginViewComponent extends Component {
           </Item>
           <Button
             style={styles.buttonStyle}
-            title="Log In"
+            title="Sign Up"
             onPress={this.authenticate}
           />
         </Form>
