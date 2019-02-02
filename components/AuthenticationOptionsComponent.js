@@ -14,30 +14,56 @@ class AuthenticationOptionsComponent extends Component {
     this.props.logout();
   }
 
-  render() {
-    const { navigate } = this.props.navigation;
+  renderLoggedOut() {
+    if (!this.props.user.userData) {
+      const { navigate } = this.props.navigation;
 
+      return (
+        <View>
+          <Button
+            bordered
+            light
+            style={styles.buttonStyle}
+            onPress={() => navigate('LoginView')}
+          >
+            <Text style={styles.textStyle}>Login</Text>
+          </Button>
+          <Button
+            bordered
+            light
+            style={styles.buttonStyle}
+            onPress={() => navigate('SignupView')}
+          >
+            <Text style={styles.textStyle}>Signup</Text>
+          </Button>
+        </View>
+      );
+    }
+  }
+
+  renderLoggedIn() {
+    if (this.props.user.userData) {
+      return (
+        <View>
+          <Button
+            bordered
+            light
+            style={styles.buttonStyle}
+            onPress={this.logout}
+          >
+            <Text style={styles.textStyle}>Logout</Text>
+          </Button>
+        </View>
+      );
+    }
+  }
+
+  render() {
+    console.log('user', this.props.user);
     return (
       <View>
-        <Button
-          bordered
-          light
-          style={styles.buttonStyle}
-          onPress={() => navigate('LoginView')}
-        >
-          <Text style={styles.textStyle}>Login</Text>
-        </Button>
-        <Button
-          bordered
-          light
-          style={styles.buttonStyle}
-          onPress={() => navigate('SignupView')}
-        >
-          <Text style={styles.textStyle}>Signup</Text>
-        </Button>
-        <Button bordered light style={styles.buttonStyle} onPress={this.logout}>
-          <Text style={styles.textStyle}>Logout</Text>
-        </Button>
+        {this.renderLoggedOut()}
+        {this.renderLoggedIn()}
       </View>
     );
   }
