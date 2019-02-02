@@ -12,7 +12,13 @@ class WelcomeComponent extends Component {
 
   loadState = async () => {
     const savedState = await AsyncStorage.getItem('@UserStore:userState');
-    this.props.setStateFromStorage(savedState);
+    if (savedState) {
+      this.props.setStateFromStorage(savedState);
+      if (this.props.user.userData.access_token) {
+        const { navigate } = this.props.navigation;
+        navigate('NflGameList');
+      }
+    }
   };
 
   render() {
