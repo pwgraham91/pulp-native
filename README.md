@@ -1,5 +1,9 @@
 # Pulp-Native
 
+## Working with the server
+- You must have the pulp server running.
+- Ngrok it with `ngrok http 5000` and change the url base the app points at in appConfig.js apiURL
+
 ## Running On Android
 - Get android studio
 - Create a virtual device (you may need to create any sort of project to get to this option. It's in the top right once you do)
