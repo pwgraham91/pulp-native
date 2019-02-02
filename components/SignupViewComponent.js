@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Button, StyleSheet } from 'react-native';
-import {
-  incrementCounterAction,
-  setAccessToken,
-} from '../reducers/userReducer';
+import { incrementCounterAction, setUserData } from '../reducers/userReducer';
 import { connect } from 'react-redux';
 import { Container, Form, Input, Item } from 'native-base';
 
@@ -25,10 +22,12 @@ class LoginViewComponent extends Component {
     this.props.user.axios
       .post('/create_user', JSON.stringify(this.state))
       .then(responseJson => {
-        this.props.setAccessToken(responseJson.data.access_token);
+        this.props.setUserData(responseJson.data);
+        const { navigate } = this.props.navigation;
+        navigate('NflGameList');
       })
       .catch(error => {
-        console.log('error', error);
+        console.log('signup error', error);
       });
   }
 
@@ -109,7 +108,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  setAccessToken,
+  setUserData,
   incrementCounterAction,
 };
 
