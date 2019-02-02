@@ -9,7 +9,6 @@ class NflGameList extends Component {
   }
 
   render() {
-    console.log('rndering nfl');
     return (
       <View style={styles.container}>
         <Image

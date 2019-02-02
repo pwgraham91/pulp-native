@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Button } from 'native-base';
+import { logout } from '../reducers/userReducer';
+import { connect } from 'react-redux';
 
-export default class AuthenticationOptionsComponent extends Component {
+class AuthenticationOptionsComponent extends Component {
   constructor(props) {
     super(props);
+    this.logout = this.logout.bind(this);
+  }
+
+  logout() {
+    this.props.logout();
   }
 
   render() {
@@ -28,6 +35,9 @@ export default class AuthenticationOptionsComponent extends Component {
         >
           <Text style={styles.textStyle}>Signup</Text>
         </Button>
+        <Button bordered light style={styles.buttonStyle} onPress={this.logout}>
+          <Text style={styles.textStyle}>Logout</Text>
+        </Button>
       </View>
     );
   }
@@ -48,3 +58,16 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 });
+
+const mapStateToProps = state => {
+  return state;
+};
+
+const mapDispatchToProps = {
+  logout,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AuthenticationOptionsComponent);

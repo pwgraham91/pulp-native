@@ -17,7 +17,6 @@ class LoginViewComponent extends Component {
   }
 
   authenticate() {
-    console.log('authing');
     this.props.user.axios
       .post('/login', JSON.stringify(this.state))
       .then(responseJson => {

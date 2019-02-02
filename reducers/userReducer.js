@@ -3,9 +3,14 @@ import { AsyncStorage } from 'react-native';
 
 const SET_USER_DATA = 'set_user_data';
 const SET_STATE_FROM_STORAGE = 'set_state_from_storage';
+const LOGOUT = 'logout';
 
 function setUserAsyncStorage(state) {
   AsyncStorage.setItem('@UserStore:userState', JSON.stringify(state));
+}
+
+function clearUserAsyncStorage() {
+  AsyncStorage.removeItem('@UserStore:userState');
 }
 
 export default function userReducer(state = {}, action) {
@@ -18,11 +23,10 @@ export default function userReducer(state = {}, action) {
       setUserAsyncStorage(incrementState);
       return incrementState;
     case SET_USER_DATA:
-      console.log('state', state);
       const userState = {
         userData: action.userData,
         axios: buildAxios({
-          Authorization: `Bearer ${action.userData.accessToken}`,
+          Authorization: `Bearer ${action.userData.access_token}`,
         }),
       };
       setUserAsyncStorage(userState);
@@ -33,13 +37,16 @@ export default function userReducer(state = {}, action) {
         const mystate = {
           ...loadedState,
           axios: buildAxios({
-            Authorization: `Bearer ${loadedState.userData.accessToken}`,
+            Authorization: `Bearer ${loadedState.userData.access_token}`,
           }),
         };
-        console.log('setting from storage', mystate);
+
         return mystate;
       }
       return loadedState;
+    case LOGOUT:
+      clearUserAsyncStorage();
+      return {};
     default:
       return {
         axios: buildAxios(),
@@ -65,5 +72,11 @@ export function setStateFromStorage(storageState) {
   return {
     type: SET_STATE_FROM_STORAGE,
     storageState,
+  };
+}
+
+export function logout() {
+  return {
+    type: LOGOUT,
   };
 }
