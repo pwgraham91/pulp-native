@@ -3,13 +3,12 @@ import { View, StyleSheet, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { Text } from 'native-base';
 
-class NflGameList extends Component {
+class LeagueGameListComponent extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    // todo make this a LeagueGameList and pass in the league
     return (
       <View style={styles.container}>
         <Image
@@ -21,6 +20,7 @@ class NflGameList extends Component {
             marginBottom: 100,
           }}
         />
+        {/* todo change this to read from props */}
         <Text>NFL</Text>
       </View>
     );
@@ -45,4 +45,4 @@ const mapDispatchToProps = {};
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(NflGameList);
+)(LeagueGameListComponent);

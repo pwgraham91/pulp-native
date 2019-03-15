@@ -11,7 +11,7 @@ import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import userReducer from './reducers/userReducer';
 import SignupViewComponent from './components/SignupViewComponent';
-import NflGameList from './components/NflGameList';
+import LeagueGameListComponent from './components/LeagueGameListComponent';
 import LeagueListComponent from './components/LeagueListComponent';
 
 const AppNavigator = createStackNavigator({
@@ -39,8 +39,8 @@ const AppNavigator = createStackNavigator({
       header: null,
     },
   },
-  NflGameList: {
-    screen: NflGameList,
+  LeagueGameList: {
+    screen: LeagueGameListComponent,
     navigationOptions: {
       header: null,
     },

@@ -24,7 +24,7 @@ class LoginViewComponent extends Component {
       .then(responseJson => {
         this.props.setUserData(responseJson.data);
         const { navigate } = this.props.navigation;
-        navigate('NflGameList');
+        navigate('LeagueGameList');
       })
       .catch(error => {
         console.log('signup error', error);

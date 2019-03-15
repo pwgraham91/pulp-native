@@ -26,7 +26,7 @@ class LeagueListComponent extends Component {
           bordered
           light
           style={styles.buttonStyle}
-          onPress={() => navigate('NflGameList')}
+          onPress={() => navigate('LeagueGameList')}
         >
           <Text style={styles.textStyle}>NFL</Text>
         </Button>
@@ -34,7 +34,7 @@ class LeagueListComponent extends Component {
           bordered
           light
           style={styles.buttonStyle}
-          onPress={() => navigate('NflGameList')}
+          onPress={() => navigate('LeagueGameList')}
         >
           <Text style={styles.textStyle}>NFL</Text>
         </Button>
