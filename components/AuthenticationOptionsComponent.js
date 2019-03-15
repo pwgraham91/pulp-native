@@ -59,7 +59,6 @@ class AuthenticationOptionsComponent extends Component {
   }
 
   render() {
-    console.log('user', this.props.user);
     return (
       <View>
         {this.renderLoggedOut()}

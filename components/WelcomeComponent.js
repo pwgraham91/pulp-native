@@ -16,7 +16,7 @@ class WelcomeComponent extends Component {
       this.props.setStateFromStorage(savedState);
       if (this.props.user.userData.access_token) {
         const { navigate } = this.props.navigation;
-        navigate('NflGameList');
+        navigate('LeagueList');
       }
     }
   };

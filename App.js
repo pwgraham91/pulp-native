@@ -12,6 +12,7 @@ import { Provider, connect } from 'react-redux';
 import userReducer from './reducers/userReducer';
 import SignupViewComponent from './components/SignupViewComponent';
 import NflGameList from './components/NflGameList';
+import LeagueListComponent from './components/LeagueListComponent';
 
 const AppNavigator = createStackNavigator({
   Welcome: {
@@ -28,6 +29,12 @@ const AppNavigator = createStackNavigator({
   },
   SignupView: {
     screen: SignupViewComponent,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  LeagueList: {
+    screen: LeagueListComponent,
     navigationOptions: {
       header: null,
     },
