@@ -9,6 +9,7 @@ class NflGameList extends Component {
   }
 
   render() {
+    // todo make this a LeagueGameList and pass in the league
     return (
       <View style={styles.container}>
         <Image
