@@ -22,11 +22,16 @@ class LeagueListComponent extends Component {
             marginBottom: 100,
           }}
         />
+        {/* todo render buttons dynamically with a leagues list */}
         <Button
           bordered
           light
           style={styles.buttonStyle}
-          onPress={() => navigate('LeagueGameList')}
+          onPress={() =>
+            navigate('LeagueGameList', {
+              league: 'NFL',
+            })
+          }
         >
           <Text style={styles.textStyle}>NFL</Text>
         </Button>
@@ -34,9 +39,13 @@ class LeagueListComponent extends Component {
           bordered
           light
           style={styles.buttonStyle}
-          onPress={() => navigate('LeagueGameList')}
+          onPress={() =>
+            navigate('LeagueGameList', {
+              league: 'NBA',
+            })
+          }
         >
-          <Text style={styles.textStyle}>NFL</Text>
+          <Text style={styles.textStyle}>NBA</Text>
         </Button>
       </View>
     );

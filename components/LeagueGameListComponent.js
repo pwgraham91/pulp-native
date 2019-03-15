@@ -6,6 +6,9 @@ import { Text } from 'native-base';
 class LeagueGameListComponent extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      ...this.props.navigation.state.params,
+    };
   }
 
   render() {
@@ -20,8 +23,7 @@ class LeagueGameListComponent extends Component {
             marginBottom: 100,
           }}
         />
-        {/* todo change this to read from props */}
-        <Text>NFL</Text>
+        <Text>{this.state.league}</Text>
       </View>
     );
   }
