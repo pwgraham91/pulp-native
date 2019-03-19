@@ -15,13 +15,6 @@ function clearUserAsyncStorage() {
 
 export default function userReducer(state = {}, action) {
   switch (action.type) {
-    case 'increment_counter':
-      const incrementState = {
-        ...state,
-        counter: (state.counter += 1),
-      };
-      setUserAsyncStorage(incrementState);
-      return incrementState;
     case SET_USER_DATA:
       const userState = {
         userData: action.userData,
@@ -59,12 +52,6 @@ export function setUserData(userData) {
   return {
     type: SET_USER_DATA,
     userData,
-  };
-}
-
-export function incrementCounterAction() {
-  return {
-    type: 'increment_counter',
   };
 }
 

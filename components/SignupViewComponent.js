@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, StyleSheet } from 'react-native';
-import { incrementCounterAction, setUserData } from '../reducers/userReducer';
+import { setUserData } from '../reducers/userReducer';
 import { connect } from 'react-redux';
 import { Container, Form, Input, Item } from 'native-base';
 
@@ -109,7 +109,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   setUserData,
-  incrementCounterAction,
 };
 
 export default connect(
