@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { Font } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
@@ -16,13 +16,30 @@ import {
   Title,
   Right,
 } from 'native-base';
+import { Leagues } from '../lib/info';
 
 class LeagueGameListComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
       ...this.props.navigation.state.params,
+      events: ['kkjk'],
     };
+    this.getSportsData = this.getSportsData.bind(this);
+  }
+
+  getSportsData() {
+    this.props.user.axios
+      .get(`/event/league/${Leagues[this.state.league]}`)
+      .then(responseJson => {
+        this.setState({
+          ...this.state,
+          events: responseJson.data.results.data,
+        });
+      })
+      .catch(error => {
+        console.log('error getting events', error);
+      });
   }
 
   // Later on in your component
@@ -32,6 +49,8 @@ class LeagueGameListComponent extends Component {
       Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
       ...Ionicons.font,
     });
+
+    this.getSportsData();
   }
 
   render() {
@@ -51,18 +70,13 @@ class LeagueGameListComponent extends Component {
               <ListItem itemDivider>
                 <Text>A</Text>
               </ListItem>
-              <ListItem>
-                <Text>Aaron Bennet</Text>
-              </ListItem>
-              <ListItem>
-                <Text>Ali Connors</Text>
-              </ListItem>
-              <ListItem itemDivider>
-                <Text>B</Text>
-              </ListItem>
-              <ListItem>
-                <Text>Bradley Horowitz</Text>
-              </ListItem>
+              {this.state.events.map(function(event) {
+                return (
+                  <ListItem key={`list-item-${event.id}`}>
+                    <Text key={`text-${event.id}`}>{event.name}</Text>
+                  </ListItem>
+                );
+              })}
             </List>
           </Content>
         </Container>
