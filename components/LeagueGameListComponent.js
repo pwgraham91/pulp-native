@@ -1,7 +1,21 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import { connect } from 'react-redux';
-import { Text } from 'native-base';
+import { Font } from 'expo';
+import { Ionicons } from '@expo/vector-icons';
+
+import {
+  Container,
+  Header,
+  Content,
+  List,
+  ListItem,
+  Text,
+  Left,
+  Body,
+  Title,
+  Right,
+} from 'native-base';
 
 class LeagueGameListComponent extends Component {
   constructor(props) {
@@ -11,19 +25,47 @@ class LeagueGameListComponent extends Component {
     };
   }
 
+  // Later on in your component
+  async componentDidMount() {
+    await Font.loadAsync({
+      Roboto: require('native-base/Fonts/Roboto.ttf'),
+      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+      ...Ionicons.font,
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Image
-          source={require('../static/logo/icon-left-font.png/')}
-          style={{
-            width: 400,
-            height: 100,
-            marginTop: 100,
-            marginBottom: 100,
-          }}
-        />
-        <Text>{this.state.league}</Text>
+        <Container>
+          <Header>
+            <Left />
+            <Body>
+              <Title>{this.state.league}</Title>
+            </Body>
+            <Right />
+          </Header>
+
+          <Content>
+            <List>
+              <ListItem itemDivider>
+                <Text>A</Text>
+              </ListItem>
+              <ListItem>
+                <Text>Aaron Bennet</Text>
+              </ListItem>
+              <ListItem>
+                <Text>Ali Connors</Text>
+              </ListItem>
+              <ListItem itemDivider>
+                <Text>B</Text>
+              </ListItem>
+              <ListItem>
+                <Text>Bradley Horowitz</Text>
+              </ListItem>
+            </List>
+          </Content>
+        </Container>
       </View>
     );
   }
@@ -33,8 +75,6 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flex: 1,
-    backgroundColor: '#2F3033',
-    alignItems: 'center',
   },
 });
 
