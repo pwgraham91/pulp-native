@@ -6,11 +6,15 @@ import {
   Button,
   Platform,
   StatusBar,
+  BackHandler,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Leagues } from '../lib/info';
 
 class LeagueGameListComponent extends Component {
+  _didFocusSubscription;
+  _willBlurSubscription;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -18,6 +22,15 @@ class LeagueGameListComponent extends Component {
       events: [],
     };
     this.getSportsData = this.getSportsData.bind(this);
+
+    this._didFocusSubscription = props.navigation.addListener(
+      'didFocus',
+      payload =>
+        BackHandler.addEventListener(
+          'hardwareBackPress',
+          this.onBackButtonPressAndroid
+        )
+    );
   }
 
   getSportsData() {
@@ -35,9 +48,28 @@ class LeagueGameListComponent extends Component {
       });
   }
 
-  // Later on in your component
   componentDidMount() {
     this.getSportsData();
+    this._willBlurSubscription = this.props.navigation.addListener(
+      'willBlur',
+      payload =>
+        BackHandler.removeEventListener(
+          'hardwareBackPress',
+          this.onBackButtonPressAndroid
+        )
+    );
+  }
+
+  onBackButtonPressAndroid = () => {
+    console.log('back');
+    this.props.navigation.goBack();
+    return true;
+  };
+
+  componentWillUnmount() {
+    console.log('unmounteed');
+    this._didFocusSubscription && this._didFocusSubscription.remove();
+    this._willBlurSubscription && this._willBlurSubscription.remove();
   }
 
   render() {
