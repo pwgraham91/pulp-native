@@ -54,7 +54,7 @@ class LoginViewComponent extends Component {
   render() {
     return (
       <View>
-        <Text>Login</Text>
+        <Text>Sign up</Text>
       </View>
       // <Container style={styles.container}>
       //   <Form>
