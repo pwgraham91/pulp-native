@@ -39,18 +39,17 @@ class AuthenticationOptionsComponent extends Component {
   }
 
   renderLoggedIn() {
+    console.log('logged in', this.props.user);
     if (this.props.user.userData) {
       return (
         <View>
           <Button
-            title={'b3'}
+            title={'Logout'}
             bordered
             light
             style={styles.buttonStyle}
             onPress={this.logout}
-          >
-            <Text style={styles.textStyle}>Logout</Text>
-          </Button>
+          />
         </View>
       );
     }

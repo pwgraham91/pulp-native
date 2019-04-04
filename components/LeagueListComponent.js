@@ -12,15 +12,6 @@ class LeagueListComponent extends Component {
 
     return (
       <View style={styles.container}>
-        <Image
-          source={require('../static/logo/icon-left-font.png/')}
-          style={{
-            width: 400,
-            height: 100,
-            marginTop: 100,
-            marginBottom: 100,
-          }}
-        />
         {/* todo render buttons dynamically with a leagues list */}
         <Button
           title={'NFL'}
@@ -28,7 +19,7 @@ class LeagueListComponent extends Component {
           light
           style={styles.buttonStyle}
           onPress={() =>
-            navigate('LeagueGameList', {
+            navigate('WelcomeComp', {
               league: 'NFL',
             })
           }

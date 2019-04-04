@@ -7,6 +7,7 @@ import {
   Platform,
   StatusBar,
   BackHandler,
+  FlatList,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Leagues } from '../lib/info';
@@ -61,13 +62,11 @@ class LeagueGameListComponent extends Component {
   }
 
   onBackButtonPressAndroid = () => {
-    console.log('back');
     this.props.navigation.goBack();
     return true;
   };
 
   componentWillUnmount() {
-    console.log('unmounteed');
     this._didFocusSubscription && this._didFocusSubscription.remove();
     this._willBlurSubscription && this._willBlurSubscription.remove();
   }
@@ -75,16 +74,11 @@ class LeagueGameListComponent extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.container}>
-          {this.state.events.map(function(event) {
-            return <Text key={`text-${event.id}`}>{event.name}</Text>;
+        <FlatList
+          data={this.state.events.map(function(event) {
+            return { key: event.name };
           })}
-        </View>
-        <Button // todo override the android back button to do this
-          title={'Back'}
-          bordered
-          light
-          onPress={() => this.props.navigation.goBack()}
+          renderItem={({ item }) => <Text style={styles.item}>{item.key}</Text>}
         />
       </View>
     );

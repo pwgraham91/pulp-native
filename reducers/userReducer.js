@@ -27,7 +27,7 @@ export default function userReducer(state = {}, action) {
     case SET_STATE_FROM_STORAGE:
       const loadedState = JSON.parse(action.storageState);
       if (loadedState.userData) {
-        const mystate = {
+        return {
           ...loadedState,
           axios: buildAxios({
             Authorization: `Bearer ${loadedState.userData.access_token}`,

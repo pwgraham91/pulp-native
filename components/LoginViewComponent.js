@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
 import { setUserData } from '../reducers/userReducer';
 import { connect } from 'react-redux';
 
@@ -21,7 +21,7 @@ class LoginViewComponent extends Component {
       .then(responseJson => {
         this.props.setUserData(responseJson.data);
         const { navigate } = this.props.navigation;
-        navigate('LeagueGameList');
+        navigate('Welcome');
       })
       .catch(error => {
         console.log('login error', error);
@@ -44,33 +44,25 @@ class LoginViewComponent extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <Text>Login</Text>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Email Address"
+          onChangeText={this.updateEmail}
+        />
+        <TextInput
+          style={styles.textInput}
+          placeholder="Password"
+          secureTextEntry={true}
+          onChangeText={this.updatePassword}
+        />
+        <Button
+          style={styles.buttonStyle}
+          title="Log In"
+          onPress={this.authenticate}
+        />
       </View>
-      // <Container style={styles.container}>
-      //   <Form>
-      //     <Item>
-      //       <Input
-      //         style={styles.textInput}
-      //         placeholder="Email Address"
-      //         onChangeText={this.updateEmail}
-      //       />
-      //     </Item>
-      //     <Item>
-      //       <Input
-      //         style={styles.textInput}
-      //         placeholder="Password"
-      //         secureTextEntry={true}
-      //         onChangeText={this.updatePassword}
-      //       />
-      //     </Item>
-      //     <Button
-      //       style={styles.buttonStyle}
-      //       title="Log In"
-      //       onPress={this.authenticate}
-      //     />
-      //   </Form>
-      // </Container>
     );
   }
 }
