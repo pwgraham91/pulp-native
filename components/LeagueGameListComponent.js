@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  Button,
+  Platform,
+  StatusBar,
+} from 'react-native';
 import { connect } from 'react-redux';
 import { Leagues } from '../lib/info';
 
@@ -36,9 +43,17 @@ class LeagueGameListComponent extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.state.events.map(function(event) {
-          return <Text key={`text-${event.id}`}>{event.name}</Text>;
-        })}
+        <View style={styles.container}>
+          {this.state.events.map(function(event) {
+            return <Text key={`text-${event.id}`}>{event.name}</Text>;
+          })}
+        </View>
+        <Button // todo override the android back button to do this
+          title={'Back'}
+          bordered
+          light
+          onPress={() => this.props.navigation.goBack()}
+        />
       </View>
     );
   }
@@ -48,6 +63,7 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flex: 1,
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
 });
 

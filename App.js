@@ -5,7 +5,7 @@ import LoginViewComponent from './components/LoginViewComponent';
 import {
   createNavigationReducer,
   createReactNavigationReduxMiddleware,
-  reduxifyNavigator,
+  createReduxContainer,
 } from 'react-navigation-redux-helpers';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
@@ -53,11 +53,11 @@ const appReducer = combineReducers({
 });
 
 const middleware = createReactNavigationReduxMiddleware(
-  'root',
-  state => state.nav
+  state => state.nav,
+  'root'
 );
 
-const App = reduxifyNavigator(AppNavigator, 'root');
+const App = createReduxContainer(AppNavigator, 'root');
 const mapStateToProps = state => ({
   state: state.nav,
 });
