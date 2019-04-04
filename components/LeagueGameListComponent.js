@@ -1,21 +1,6 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { Font } from 'expo';
-import { Ionicons } from '@expo/vector-icons';
-
-import {
-  Container,
-  Header,
-  Content,
-  List,
-  ListItem,
-  Text,
-  Left,
-  Body,
-  Title,
-  Right,
-} from 'native-base';
 import { Leagues } from '../lib/info';
 
 class LeagueGameListComponent extends Component {
@@ -32,6 +17,7 @@ class LeagueGameListComponent extends Component {
     this.props.user.axios
       .get(`/event/league/${Leagues[this.state.league]}`)
       .then(responseJson => {
+        console.log('event', responseJson.data.results.data);
         this.setState({
           ...this.state,
           events: responseJson.data.results.data,
@@ -43,43 +29,16 @@ class LeagueGameListComponent extends Component {
   }
 
   // Later on in your component
-  async componentDidMount() {
-    await Font.loadAsync({
-      Roboto: require('native-base/Fonts/Roboto.ttf'),
-      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-      ...Ionicons.font,
-    });
-
+  componentDidMount() {
     this.getSportsData();
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Container>
-          <Header>
-            <Left />
-            <Body>
-              <Title>{this.state.league}</Title>
-            </Body>
-            <Right />
-          </Header>
-
-          <Content>
-            <List>
-              <ListItem itemDivider>
-                <Text>A</Text>
-              </ListItem>
-              {this.state.events.map(function(event) {
-                return (
-                  <ListItem key={`list-item-${event.id}`}>
-                    <Text key={`text-${event.id}`}>{event.name}</Text>
-                  </ListItem>
-                );
-              })}
-            </List>
-          </Content>
-        </Container>
+        {this.state.events.map(function(event) {
+          return <Text key={`text-${event.id}`}>{event.name}</Text>;
+        })}
       </View>
     );
   }

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Button, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text, View } from 'react-native';
 import { setUserData } from '../reducers/userReducer';
 import { connect } from 'react-redux';
-import { Container, Form, Input, Item } from 'native-base';
 
 class LoginViewComponent extends Component {
   constructor(props) {
@@ -54,37 +53,40 @@ class LoginViewComponent extends Component {
 
   render() {
     return (
-      <Container style={styles.container}>
-        <Form>
-          <Item>
-            <Input
-              style={styles.textInput}
-              placeholder="Name"
-              onChangeText={this.updateName}
-            />
-          </Item>
-          <Item>
-            <Input
-              style={styles.textInput}
-              placeholder="Email Address"
-              onChangeText={this.updateEmail}
-            />
-          </Item>
-          <Item>
-            <Input
-              style={styles.textInput}
-              placeholder="Password"
-              secureTextEntry={true}
-              onChangeText={this.updatePassword}
-            />
-          </Item>
-          <Button
-            style={styles.buttonStyle}
-            title="Sign Up"
-            onPress={this.authenticate}
-          />
-        </Form>
-      </Container>
+      <View>
+        <Text>Login</Text>
+      </View>
+      // <Container style={styles.container}>
+      //   <Form>
+      //     <Item>
+      //       <Input
+      //         style={styles.textInput}
+      //         placeholder="Name"
+      //         onChangeText={this.updateName}
+      //       />
+      //     </Item>
+      //     <Item>
+      //       <Input
+      //         style={styles.textInput}
+      //         placeholder="Email Address"
+      //         onChangeText={this.updateEmail}
+      //       />
+      //     </Item>
+      //     <Item>
+      //       <Input
+      //         style={styles.textInput}
+      //         placeholder="Password"
+      //         secureTextEntry={true}
+      //         onChangeText={this.updatePassword}
+      //       />
+      //     </Item>
+      //     <Button
+      //       style={styles.buttonStyle}
+      //       title="Sign Up"
+      //       onPress={this.authenticate}
+      //     />
+      //   </Form>
+      // </Container>
     );
   }
 }

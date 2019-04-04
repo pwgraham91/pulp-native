@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, Button, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { Button, Text } from 'native-base';
 
 class LeagueListComponent extends Component {
   constructor(props) {

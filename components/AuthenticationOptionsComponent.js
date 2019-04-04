@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-import { Button } from 'native-base';
+import { View, StyleSheet, Text, Button } from 'react-native';
 import { logout } from '../reducers/userReducer';
 import { connect } from 'react-redux';
 
