@@ -8,7 +8,7 @@ class LeagueGameListComponent extends Component {
     super(props);
     this.state = {
       ...this.props.navigation.state.params,
-      events: ['kkjk'],
+      events: [],
     };
     this.getSportsData = this.getSportsData.bind(this);
   }

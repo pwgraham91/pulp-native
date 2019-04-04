@@ -23,6 +23,7 @@ class LeagueListComponent extends Component {
         />
         {/* todo render buttons dynamically with a leagues list */}
         <Button
+          title={'NFL'}
           bordered
           light
           style={styles.buttonStyle}
@@ -31,10 +32,9 @@ class LeagueListComponent extends Component {
               league: 'NFL',
             })
           }
-        >
-          <Text style={styles.textStyle}>NFL</Text>
-        </Button>
+        />
         <Button
+          title={'NBA'}
           bordered
           light
           style={styles.buttonStyle}
@@ -43,9 +43,7 @@ class LeagueListComponent extends Component {
               league: 'NBA',
             })
           }
-        >
-          <Text style={styles.textStyle}>NBA</Text>
-        </Button>
+        />
       </View>
     );
   }

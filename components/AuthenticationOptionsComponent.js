@@ -23,18 +23,16 @@ class AuthenticationOptionsComponent extends Component {
             bordered
             light
             style={styles.buttonStyle}
+            title={'Login'}
             onPress={() => navigate('LoginView')}
-          >
-            <Text style={styles.textStyle}>Login</Text>
-          </Button>
+          />
           <Button
             bordered
             light
             style={styles.buttonStyle}
+            title={'Signup'}
             onPress={() => navigate('SignupView')}
-          >
-            <Text style={styles.textStyle}>Signup</Text>
-          </Button>
+          />
         </View>
       );
     }
@@ -45,6 +43,7 @@ class AuthenticationOptionsComponent extends Component {
       return (
         <View>
           <Button
+            title={'b3'}
             bordered
             light
             style={styles.buttonStyle}
