@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { AsyncStorage, View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, AsyncStorage } from 'react-native';
 import AuthenticationOptionsComponent from './AuthenticationOptionsComponent';
 import { setStateFromStorage } from '../reducers/userReducer';
 import { connect } from 'react-redux';
+import LeagueListComponent from './LeagueListComponent';
 
 class WelcomeComponent extends Component {
   constructor(props) {
@@ -14,10 +15,6 @@ class WelcomeComponent extends Component {
     const savedState = await AsyncStorage.getItem('@UserStore:userState');
     if (savedState) {
       this.props.setStateFromStorage(savedState);
-      if (this.props.user.userData.access_token) {
-        const { navigate } = this.props.navigation;
-        navigate('NflGameList');
-      }
     }
   };
 
@@ -34,6 +31,7 @@ class WelcomeComponent extends Component {
           }}
         />
         <AuthenticationOptionsComponent navigation={this.props.navigation} />
+        <LeagueListComponent navigation={this.props.navigation} />
       </View>
     );
   }

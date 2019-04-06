@@ -5,13 +5,14 @@ import LoginViewComponent from './components/LoginViewComponent';
 import {
   createNavigationReducer,
   createReactNavigationReduxMiddleware,
-  reduxifyNavigator,
+  createReduxContainer,
 } from 'react-navigation-redux-helpers';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import userReducer from './reducers/userReducer';
 import SignupViewComponent from './components/SignupViewComponent';
-import NflGameList from './components/NflGameList';
+import LeagueGameListComponent from './components/LeagueGameListComponent';
+import LeagueListComponent from './components/LeagueListComponent';
 
 const AppNavigator = createStackNavigator({
   Welcome: {
@@ -32,8 +33,14 @@ const AppNavigator = createStackNavigator({
       header: null,
     },
   },
-  NflGameList: {
-    screen: NflGameList,
+  LeagueList: {
+    screen: LeagueListComponent,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  LeagueGameList: {
+    screen: LeagueGameListComponent,
     navigationOptions: {
       header: null,
     },
@@ -46,11 +53,11 @@ const appReducer = combineReducers({
 });
 
 const middleware = createReactNavigationReduxMiddleware(
-  'root',
-  state => state.nav
+  state => state.nav,
+  'root'
 );
 
-const App = reduxifyNavigator(AppNavigator, 'root');
+const App = createReduxContainer(AppNavigator, 'root');
 const mapStateToProps = state => ({
   state: state.nav,
 });

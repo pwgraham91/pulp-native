@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-import { Button } from 'native-base';
+import { View, StyleSheet, Text, Button } from 'react-native';
 import { logout } from '../reducers/userReducer';
 import { connect } from 'react-redux';
 
@@ -24,42 +23,39 @@ class AuthenticationOptionsComponent extends Component {
             bordered
             light
             style={styles.buttonStyle}
+            title={'Login'}
             onPress={() => navigate('LoginView')}
-          >
-            <Text style={styles.textStyle}>Login</Text>
-          </Button>
+          />
           <Button
             bordered
             light
             style={styles.buttonStyle}
+            title={'Signup'}
             onPress={() => navigate('SignupView')}
-          >
-            <Text style={styles.textStyle}>Signup</Text>
-          </Button>
+          />
         </View>
       );
     }
   }
 
   renderLoggedIn() {
+    console.log('logged in', this.props.user);
     if (this.props.user.userData) {
       return (
         <View>
           <Button
+            title={'Logout'}
             bordered
             light
             style={styles.buttonStyle}
             onPress={this.logout}
-          >
-            <Text style={styles.textStyle}>Logout</Text>
-          </Button>
+          />
         </View>
       );
     }
   }
 
   render() {
-    console.log('user', this.props.user);
     return (
       <View>
         {this.renderLoggedOut()}

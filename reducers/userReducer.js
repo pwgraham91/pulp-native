@@ -15,13 +15,6 @@ function clearUserAsyncStorage() {
 
 export default function userReducer(state = {}, action) {
   switch (action.type) {
-    case 'increment_counter':
-      const incrementState = {
-        ...state,
-        counter: (state.counter += 1),
-      };
-      setUserAsyncStorage(incrementState);
-      return incrementState;
     case SET_USER_DATA:
       const userState = {
         userData: action.userData,
@@ -34,7 +27,7 @@ export default function userReducer(state = {}, action) {
     case SET_STATE_FROM_STORAGE:
       const loadedState = JSON.parse(action.storageState);
       if (loadedState.userData) {
-        const mystate = {
+        return {
           ...loadedState,
           axios: buildAxios({
             Authorization: `Bearer ${loadedState.userData.access_token}`,
@@ -59,12 +52,6 @@ export function setUserData(userData) {
   return {
     type: SET_USER_DATA,
     userData,
-  };
-}
-
-export function incrementCounterAction() {
-  return {
-    type: 'increment_counter',
   };
 }
 

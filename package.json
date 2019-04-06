@@ -21,12 +21,11 @@
   "dependencies": {
     "axios": "^0.18.0",
     "expo": "^27.0.1",
-    "native-base": "^2.8.1",
-    "prettier": "^1.14.3",
-    "react": "16.3.1",
+    "prettier": "^1.16.4",
+    "react": "^16.8.6",
     "react-native": "~0.55.4",
-    "react-navigation": "^2.12.1",
-    "react-navigation-redux-helpers": "^2.0.5",
+    "react-navigation": "^3.6.1",
+    "react-navigation-redux-helpers": "^3.0.0",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0"
   },
