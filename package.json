@@ -24,6 +24,8 @@
     "prettier": "^1.16.4",
     "react": "^16.8.6",
     "react-native": "~0.55.4",
+    "react-native-elements": "^1.1.0",
+    "react-native-vector-icons": "^6.4.2",
     "react-navigation": "^3.6.1",
     "react-navigation-redux-helpers": "^3.0.0",
     "react-redux": "^5.0.7",

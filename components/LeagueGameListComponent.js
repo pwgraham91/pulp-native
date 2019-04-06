@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Leagues } from '../lib/info';
+import { ListItem } from 'react-native-elements';
 
 class LeagueGameListComponent extends Component {
   _didFocusSubscription;
@@ -23,6 +24,7 @@ class LeagueGameListComponent extends Component {
       events: [],
     };
     this.getSportsData = this.getSportsData.bind(this);
+    this.onPressListItem = this.onPressListItem.bind(this);
 
     this._didFocusSubscription = props.navigation.addListener(
       'didFocus',
@@ -38,7 +40,6 @@ class LeagueGameListComponent extends Component {
     this.props.user.axios
       .get(`/event/league/${Leagues[this.state.league]}`)
       .then(responseJson => {
-        console.log('event', responseJson.data.results.data);
         this.setState({
           ...this.state,
           events: responseJson.data.results.data,
@@ -71,24 +72,28 @@ class LeagueGameListComponent extends Component {
     this._willBlurSubscription && this._willBlurSubscription.remove();
   }
 
+  keyExtractor = (item, index) => index.toString();
+
+  onPressListItem = (i1, i2) => {
+    console.log('pressed', { i1, i2 });
+  };
+
+  renderSingleEvent = ({ item }) => (
+    <ListItem
+      key={item.id}
+      onPress={this.onPressListItem}
+      title={item.name}
+      subtitle={item.display_minus_line}
+    />
+  );
+
   render() {
     return (
       <View style={styles.container}>
         <FlatList
-          data={this.state.events.map(function(event) {
-            return {
-              id: event.id,
-              name: event.name,
-              lineDisplay: event.display_minus_line,
-            };
-          })}
-          renderItem={({ item }) => (
-            <View>
-              <Text style={styles.item}>{item.name}</Text>
-              <Text style={styles.item}>{item.lineDisplay}</Text>
-            </View>
-          )}
-          keyExtractor={(item, index) => index.toString()}
+          keyExtractor={this.keyExtractor}
+          data={this.state.events}
+          renderItem={this.renderSingleEvent}
         />
       </View>
     );
