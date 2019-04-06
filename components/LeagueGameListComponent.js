@@ -76,9 +76,19 @@ class LeagueGameListComponent extends Component {
       <View style={styles.container}>
         <FlatList
           data={this.state.events.map(function(event) {
-            return { key: event.name };
+            return {
+              id: event.id,
+              name: event.name,
+              lineDisplay: event.display_minus_line,
+            };
           })}
-          renderItem={({ item }) => <Text style={styles.item}>{item.key}</Text>}
+          renderItem={({ item }) => (
+            <View>
+              <Text style={styles.item}>{item.name}</Text>
+              <Text style={styles.item}>{item.lineDisplay}</Text>
+            </View>
+          )}
+          keyExtractor={(item, index) => index.toString()}
         />
       </View>
     );
