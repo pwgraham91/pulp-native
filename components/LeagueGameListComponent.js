@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import {
   View,
   StyleSheet,
-  Text,
-  Button,
   Platform,
   StatusBar,
   BackHandler,
@@ -11,6 +9,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Leagues } from '../lib/info';
+import { Container, Header, Content, List, ListItem, Text } from 'native-base';
 
 class LeagueGameListComponent extends Component {
   _didFocusSubscription;
@@ -23,6 +22,7 @@ class LeagueGameListComponent extends Component {
       events: [],
     };
     this.getSportsData = this.getSportsData.bind(this);
+    this.onClickListItem = this.onClickListItem.bind(this);
 
     this._didFocusSubscription = props.navigation.addListener(
       'didFocus',
@@ -38,7 +38,6 @@ class LeagueGameListComponent extends Component {
     this.props.user.axios
       .get(`/event/league/${Leagues[this.state.league]}`)
       .then(responseJson => {
-        console.log('event', responseJson.data.results.data);
         this.setState({
           ...this.state,
           events: responseJson.data.results.data,
@@ -71,26 +70,35 @@ class LeagueGameListComponent extends Component {
     this._willBlurSubscription && this._willBlurSubscription.remove();
   }
 
+  onClickListItem(event) {
+    console.log('clicked list item', event);
+    // todo redirect to an events page
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <FlatList
-          data={this.state.events.map(function(event) {
-            return {
-              id: event.id,
-              name: event.name,
-              lineDisplay: event.display_minus_line,
-            };
-          })}
-          renderItem={({ item }) => (
+      <Container style={styles.container}>
+        <Header />
+        <Content>
+          <List>
             <View>
-              <Text style={styles.item}>{item.name}</Text>
-              <Text style={styles.item}>{item.lineDisplay}</Text>
+              {this.state.events.map(event => (
+                <ListItem
+                  style={styles.listItem}
+                  key={event.id}
+                  button={true}
+                  onPress={() => this.onClickListItem(event)}
+                >
+                  <Text style={styles.listItemText}>{event.name}</Text>
+                  <Text style={styles.listItemText}>
+                    {event.display_minus_line}
+                  </Text>
+                </ListItem>
+              ))}
             </View>
-          )}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      </View>
+          </List>
+        </Content>
+      </Container>
     );
   }
 }
@@ -101,6 +109,11 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
+  listItem: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  listItemText: {},
 });
 
 const mapStateToProps = state => {
