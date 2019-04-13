@@ -78,7 +78,7 @@ class LeagueGameListComponent extends Component {
   render() {
     return (
       <Container style={styles.container}>
-        <Header />
+        <Header style={styles.header} />
         <Content>
           <List>
             <View>
@@ -107,7 +107,10 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flex: 1,
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+  },
+  header: {
+    height: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+    backgroundColor: '#2F3033',
   },
   listItem: {
     flex: 1,

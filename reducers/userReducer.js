@@ -20,6 +20,7 @@ export default function userReducer(state = {}, action) {
         userData: action.userData,
         axios: buildAxios({
           Authorization: `Bearer ${action.userData.access_token}`,
+          'Cache-Control': 'no-cache',
         }),
       };
       setUserAsyncStorage(userState);
