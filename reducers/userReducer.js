@@ -34,8 +34,6 @@ export default function userReducer(state = {}, action) {
             Authorization: `Bearer ${loadedState.userData.access_token}`,
           }),
         };
-
-        return mystate;
       }
       return loadedState;
     case LOGOUT:

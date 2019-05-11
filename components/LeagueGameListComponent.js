@@ -5,11 +5,19 @@ import {
   Platform,
   StatusBar,
   BackHandler,
-  FlatList,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Leagues } from '../lib/info';
-import { Container, Header, Content, List, ListItem, Text } from 'native-base';
+import {
+  Container,
+  Header,
+  Content,
+  List,
+  ListItem,
+  Text,
+  Body,
+  Title,
+} from 'native-base';
 
 class LeagueGameListComponent extends Component {
   _didFocusSubscription;
@@ -71,14 +79,19 @@ class LeagueGameListComponent extends Component {
   }
 
   onClickListItem(event) {
-    console.log('clicked list item', event);
-    // todo redirect to an events page
+    const { navigate } = this.props.navigation;
+
+    navigate('GamePageComponent', { event });
   }
 
   render() {
     return (
       <Container style={styles.container}>
-        <Header style={styles.header} />
+        <Header style={styles.header}>
+          <Body>
+            <Title style={styles.headerTitle}>{this.state.league}</Title>
+          </Body>
+        </Header>
         <Content>
           <List>
             <View>
@@ -111,6 +124,9 @@ const styles = StyleSheet.create({
   header: {
     height: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     backgroundColor: '#2F3033',
+  },
+  headerTitle: {
+    color: 'white',
   },
   listItem: {
     flex: 1,
