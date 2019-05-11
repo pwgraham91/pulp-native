@@ -8,21 +8,68 @@ class GamePageComponent extends Component {
     super(props);
     this.state = {
       ...this.props.navigation.state.params,
+      userLoggedIn: this.props.user.userData !== undefined,
     };
-    console.log('state', this.state);
+    console.log('user logged in', this.state.userLoggedIn);
+  }
+
+  componentDidMount() {
+    if (this.state.userLoggedIn) {
+      this.getUserBets();
+    }
+  }
+
+  getUserBets() {
+    this.props.user.axios
+      .get(`/event/${this.state.event.id}/wager`)
+      .then(responseJson => {
+        console.log('user wagers', responseJson.data.results.data);
+        this.setState({
+          ...this.state,
+          userWagers: responseJson.data.results.data,
+        });
+      })
+      .catch(error => {
+        console.log('error getting wagers', error);
+      });
+  }
+
+  renderUserBets(userBets) {
+    // todo: get all user bets here and render them
+
+    if (this.state.userLoggedIn) {
+      return (
+        <View>
+          <Text>User bets</Text>
+        </View>
+      );
+    }
+  }
+
+  renderPlaceBetSection() {
+    // todo: let the user place a bet from here
+
+    // todo: should probably be its own component
+    if (this.state.userLoggedIn) {
+      return (
+        <View>
+          <Text>Place a bet</Text>
+        </View>
+      );
+    }
   }
 
   render() {
-    // todo: take state and render information
-    // todo: get all user bets here and render them
-    // todo: let the user place a bet from here
     return (
       <Container style={styles.container}>
         <Header style={styles.header} />
         <Content>
           <View>
-            <Text>Game Page Component</Text>
+            <Text>{this.state.event.name}</Text>
+            <Text>{this.state.event.line}</Text>
           </View>
+          {this.renderUserBets(this.state.userWagers)}
+          {this.renderPlaceBetSection()}
         </Content>
       </Container>
     );
