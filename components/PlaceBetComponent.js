@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TextInput, Picker, Button } from 'react-native';
+import { Button, Picker, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Text } from 'native-base';
 
@@ -27,10 +27,7 @@ class PlaceBetComponent extends Component {
   }
 
   static getBetAmounts() {
-    const betAmounts = [...Array(11).keys()]
-      .filter(i => i !== 0)
-      .map(i => i * 10);
-    return betAmounts;
+    return [...Array(11).keys()].filter(i => i !== 0).map(i => i * 10);
   }
 
   render() {
