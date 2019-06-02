@@ -81,7 +81,6 @@ class LeagueGameListComponent extends Component {
   onClickListItem(event) {
     const { navigate } = this.props.navigation;
 
-    console.log('on click', this.state);
     navigate('GamePageComponent', { event });
   }
 

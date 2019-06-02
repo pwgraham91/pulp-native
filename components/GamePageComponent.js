@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Platform, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import { Container, Header, Content, Text } from 'native-base';
+import PlaceBetComponent from './PlaceBetComponent';
 
 class GamePageComponent extends Component {
   constructor(props) {
@@ -9,8 +10,8 @@ class GamePageComponent extends Component {
     this.state = {
       ...this.props.navigation.state.params,
       userLoggedIn: this.props.user.userData !== undefined,
+      user: this.props.user,
     };
-    console.log('user logged in', this.state.userLoggedIn);
   }
 
   componentDidMount() {
@@ -46,19 +47,6 @@ class GamePageComponent extends Component {
     }
   }
 
-  renderPlaceBetSection() {
-    // todo: let the user place a bet from here
-
-    // todo: should probably be its own component
-    if (this.state.userLoggedIn) {
-      return (
-        <View>
-          <Text>Place a bet</Text>
-        </View>
-      );
-    }
-  }
-
   render() {
     return (
       <Container style={styles.container}>
@@ -69,7 +57,7 @@ class GamePageComponent extends Component {
             <Text>{this.state.event.line}</Text>
           </View>
           {this.renderUserBets(this.state.userWagers)}
-          {this.renderPlaceBetSection()}
+          <PlaceBetComponent state={this.state} />
         </Content>
       </Container>
     );
