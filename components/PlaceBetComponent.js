@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Picker, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
-import { Text } from 'native-base';
+import { Title } from 'native-base';
 
 class PlaceBetComponent extends Component {
   constructor(props) {
@@ -13,6 +13,7 @@ class PlaceBetComponent extends Component {
     };
     this.updateBetAmount = this.updateBetAmount.bind(this);
     this.placeBet = this.placeBet.bind(this);
+    this.getUserBets = props.getUserBets;
   }
 
   updateBetAmount(text) {
@@ -23,7 +24,20 @@ class PlaceBetComponent extends Component {
   }
 
   placeBet() {
-    console.log('bet placed', this.state);
+    this.props.user.axios
+      .post(
+        `/event/${this.state.event.id}/wager`,
+        JSON.stringify({
+          team_id: this.state.sideSelected,
+          amount: this.state.betAmount,
+        })
+      )
+      .then(() => {
+        this.getUserBets();
+      })
+      .catch(error => {
+        console.log('error =>', error);
+      });
   }
 
   static getBetAmounts() {
@@ -35,8 +49,9 @@ class PlaceBetComponent extends Component {
       return (
         <View>
           <View style={styles.betAmountView}>
-            <Text>Bet Amount</Text>
+            <Title>Bet Amount</Title>
             <Picker
+              style={styles.picker}
               selectedValue={this.state.betAmount}
               onValueChange={(itemValue, itemIndex) =>
                 this.setState({ ...this.state, betAmount: itemValue })
@@ -45,6 +60,7 @@ class PlaceBetComponent extends Component {
               {PlaceBetComponent.getBetAmounts().map((value, index) => {
                 return (
                   <Picker.Item
+                    style={styles.picker}
                     key={index}
                     label={value.toString()}
                     value={value}
@@ -53,18 +69,21 @@ class PlaceBetComponent extends Component {
               })}
             </Picker>
           </View>
-          <Text>Choose Side</Text>
+          <Title>Choose Side</Title>
           <Picker
+            style={styles.picker}
             selectedValue={this.state.sideSelected}
             onValueChange={(itemValue, itemIndex) =>
               this.setState({ ...this.state, sideSelected: itemValue })
             }
           >
             <Picker.Item
+              style={styles.pickerItem}
               label={this.state.event.team_1.team_name}
               value={this.state.event.team_1.id}
             />
             <Picker.Item
+              style={styles.pickerItem}
               label={this.state.event.team_2.team_name}
               value={this.state.event.team_2.id}
             />
@@ -78,8 +97,8 @@ class PlaceBetComponent extends Component {
 
 const styles = StyleSheet.create({
   betAmountView: {
-    marginTop: 25,
-    marginBottom: 25,
+    marginTop: 10,
+    marginBottom: 10,
   },
 });
 

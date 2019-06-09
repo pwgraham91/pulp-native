@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Platform, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
-import { Container, Header, Content, Text } from 'native-base';
+import { Container, Header, Content, Text, Body, Title } from 'native-base';
 import PlaceBetComponent from './PlaceBetComponent';
 
 class GamePageComponent extends Component {
@@ -11,7 +11,9 @@ class GamePageComponent extends Component {
       ...this.props.navigation.state.params,
       userLoggedIn: this.props.user.userData !== undefined,
       user: this.props.user,
+      userWagers: [],
     };
+    this.getUserBets = this.getUserBets.bind(this);
   }
 
   componentDidMount() {
@@ -24,7 +26,6 @@ class GamePageComponent extends Component {
     this.props.user.axios
       .get(`/event/${this.state.event.id}/wager`)
       .then(responseJson => {
-        console.log('user wagers', responseJson.data.results.data);
         this.setState({
           ...this.state,
           userWagers: responseJson.data.results.data,
@@ -36,28 +37,38 @@ class GamePageComponent extends Component {
   }
 
   renderUserBets(userBets) {
-    // todo: get all user bets here and render them
-
     if (this.state.userLoggedIn) {
       return (
         <View>
-          <Text>User bets</Text>
+          <Title>User bets</Title>
+          {userBets.map(userBet => {
+            return <Text key={userBet.id}>{userBet.display_text}</Text>;
+          })}
         </View>
       );
     }
   }
 
   render() {
+    console.log('rendering', this.state.event);
     return (
       <Container style={styles.container}>
-        <Header style={styles.header} />
+        <Header style={styles.header}>
+          <Body>
+            <Title style={styles.headerTitle}>{this.state.event.name}</Title>
+          </Body>
+        </Header>
         <Content>
           <View>
-            <Text>{this.state.event.name}</Text>
-            <Text>{this.state.event.line}</Text>
+            <Text>{this.state.event.display_minus_line}</Text>
           </View>
           {this.renderUserBets(this.state.userWagers)}
-          <PlaceBetComponent state={this.state} />
+          <View style={styles.placeBet}>
+            <PlaceBetComponent
+              state={this.state}
+              getUserBets={this.getUserBets}
+            />
+          </View>
         </Content>
       </Container>
     );
@@ -72,6 +83,12 @@ const styles = StyleSheet.create({
   header: {
     height: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     backgroundColor: '#2F3033',
+  },
+  headerTitle: {
+    color: 'white',
+  },
+  placeBet: {
+    marginBottom: 50,
   },
 });
 
