@@ -13,6 +13,7 @@ import userReducer from './reducers/userReducer';
 import SignupViewComponent from './components/SignupViewComponent';
 import LeagueGameListComponent from './components/LeagueGameListComponent';
 import LeagueListComponent from './components/LeagueListComponent';
+import GamePageComponent from './components/GamePageComponent';
 
 const AppNavigator = createStackNavigator({
   Welcome: {
@@ -41,6 +42,12 @@ const AppNavigator = createStackNavigator({
   },
   LeagueGameList: {
     screen: LeagueGameListComponent,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  GamePageComponent: {
+    screen: GamePageComponent,
     navigationOptions: {
       header: null,
     },

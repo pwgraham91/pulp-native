@@ -39,7 +39,6 @@ class AuthenticationOptionsComponent extends Component {
   }
 
   renderLoggedIn() {
-    console.log('logged in', this.props.user);
     if (this.props.user.userData) {
       return (
         <View>
